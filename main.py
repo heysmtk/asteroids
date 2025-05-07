@@ -44,6 +44,12 @@ def main():
 
         for obj in drawable:
             obj.draw(screen)
+            
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collides_with(asteroid):
+                    shot.kill()
+                    asteroid.kill()
 
         pygame.display.flip()
 
@@ -54,3 +60,5 @@ def main():
 if __name__ == "__main__":
     main()
  
+ 
+# Projděte smyčkou každý asteroid a pro každý asteroid projděte smyčkou každou kulku. Pokud se kulka a asteroid srazí, zavolejte na oba objekty metodu .kill(), abyste je odstranili ze hry.
