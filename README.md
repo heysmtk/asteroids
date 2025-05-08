@@ -75,6 +75,6 @@ python -m src.main
 - Create a start menu and game over screen
 
 ### 📄 License
-MIT – do whatever you want, just have fun 🚀
+[MIT](https://github.com/heysmtk/asteroids/blob/main/LICENSE) – do whatever you want, just have fun 🚀
 
 - Made with ❤️ by **@heysmtk**
