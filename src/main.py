@@ -12,53 +12,59 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
 
+    # Sprite groups for update and draw logic
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
 
+    # Register sprite containers for auto-management
     Asteroid.containers = (asteroids, updatable, drawable)
     Shot.containers = (shots, updatable, drawable)
     AsteroidField.containers = updatable
-    asteroid_field = AsteroidField()
-
     Player.containers = (updatable, drawable)
 
+    # Initialize objects
+    asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
-    dt = 0
+    dt = 0  # Delta time between frames
 
     while True:
+        # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
 
+        # Update all game objects
         updatable.update(dt)
 
+        # Check collisions between player and asteroids
         for asteroid in asteroids:
             if asteroid.collides_with(player):
                 print("Game over!")
                 sys.exit()
 
+        # Clear screen
         screen.fill("black")
 
+        # Draw all drawable objects
         for obj in drawable:
             obj.draw(screen)
-            
+
+        # Check collisions between shots and asteroids
         for asteroid in asteroids:
             for shot in shots:
                 if shot.collides_with(asteroid):
-                    shot.kill()
-                    asteroid.split()
+                    shot.kill()          # Remove shot from the game
+                    asteroid.split()     # Split or destroy asteroid
 
+        # Update display
         pygame.display.flip()
 
-        # limit the framerate to 60 FPS
+        # Limit the framerate to 60 FPS and calculate delta time
         dt = clock.tick(60) / 1000
 
 
 if __name__ == "__main__":
     main()
- 
- 
-# Projděte smyčkou každý asteroid a pro každý asteroid projděte smyčkou každou kulku. Pokud se kulka a asteroid srazí, zavolejte na oba objekty metodu .kill(), abyste je odstranili ze hry.

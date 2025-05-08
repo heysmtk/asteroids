@@ -18,7 +18,7 @@ class Player(CircleShape):
     def triangle(self):
         """
         Calculates the three points of the player's triangle shape based on position and rotation.
-        Returns a list of three vectors representing the triangle's corners.
+        Returns a list of three vectors representing the triangles corners.
         """
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
